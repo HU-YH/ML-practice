@@ -1,0 +1,115 @@
+---
+title: "A1Q2"
+author: "Yuhan Hu"
+date: "2021/2/7"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+---
+
+\newpage
+
+#2 
+
+
+## 2.1
+
+
+### A
+
+$E(\boldsymbol{w})=\frac{1}{2}\sum_{n=1}^{N}(\boldsymbol{\Phi}_n^T\boldsymbol{w}-\boldsymbol{t}_n)^2$
+
+$=\frac{1}{2}(\boldsymbol{\Phi}\boldsymbol{w}-\boldsymbol{t})^T(\boldsymbol{\Phi}\boldsymbol{w}-\boldsymbol{t})$
+
+$=\frac{1}{2}\boldsymbol{w}^T(\boldsymbol{\Phi}^T\boldsymbol{w})-(\boldsymbol{\Phi}^T\boldsymbol{t})^T\boldsymbol{w}+\frac{1}{2}||\boldsymbol{t}||^2$
+
+want to find $\boldsymbol{w}$ that minimize $E(\boldsymbol{w})$
+
+it is equivalent to find value of $\boldsymbol{w}$such that $\nabla_{\boldsymbol{w}}E(\boldsymbol{w})=0$
+
+From lecture, we have $\nabla(\frac{1}{2}\boldsymbol{w}^T\boldsymbol{A}\boldsymbol{w})=\boldsymbol{A}\boldsymbol{w}$ for symmetric matri\Phi $\boldsymbol{A}$, and $\nabla_{\boldsymbol{w}}(\boldsymbol{a}^T\boldsymbol{w})=a$ for vector $\boldsymbol{a}$
+
+Then let $\boldsymbol{\Phi}^T\boldsymbol{\Phi}=\boldsymbol{A},\boldsymbol{\Phi}^T\boldsymbol{t}=\boldsymbol{a}$
+
+$\nabla_{\boldsymbol{w}}E(\boldsymbol{w})=\nabla{\boldsymbol{w}}(\frac{1}{2}\boldsymbol{w}^T\boldsymbol{A}\boldsymbol{w})+\nabla{\boldsymbol{w}}(\boldsymbol{a}^T\boldsymbol{w})+\nabla{\boldsymbol{w}}(\frac{1}{2}||\boldsymbol{t}||^2)$
+
+$=\boldsymbol{A}\boldsymbol{w}+\boldsymbol{a}=\boldsymbol{\Phi}^T\boldsymbol{\Phi}\boldsymbol{w}-\boldsymbol{\Phi}^T\boldsymbol{t}$
+
+set $\nabla_{\boldsymbol{w}}E(\boldsymbol{w})=0$ for $\hat{\boldsymbol{w}}$
+
+we have $\boldsymbol{\Phi}^T\boldsymbol{\Phi}\boldsymbol{w}=\boldsymbol{\Phi}^T\boldsymbol{t}\rightarrow\boldsymbol{w}=(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}\boldsymbol{t}$
+
+### B
+
+#### Expected value
+
+
+$E(\boldsymbol{\hat{w}})=E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T\boldsymbol{t}]$
+
+$=E(\boldsymbol{\hat{w}})=E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T(\boldsymbol{\Phi\boldsymbol{w}}+\boldsymbol{e})$
+
+$=E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T(\boldsymbol{\Phi\boldsymbol{w}})]+E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T(\boldsymbol{e})]$
+
+since $\boldsymbol{X}$ is a known matrix, it can be treated as a matrix of constant, so we have
+
+$E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T(\boldsymbol{\Phi\boldsymbol{w}})]+E[(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T(\boldsymbol{e})]=(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T\boldsymbol{\Phi}E[\boldsymbol{w}]+(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^TE[\boldsymbol{e}]$
+
+since $E(\boldsymbol{e})=\boldsymbol{0}$, $E[\hat{\boldsymbol{w}}]=(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T\boldsymbol{\Phi}E[\boldsymbol{w}]=\boldsymbol{I}\boldsymbol{w}=\boldsymbol{w}$  
+
+#### covariance
+
+
+$cov(\hat{w})=E[\hat{w}^2]+E(\hat{w})^2=E[\hat{w}^2]-\hat{w}^2$
+
+$E[\hat{w}^2]=E[((\Phi^T\Phi)^{-1}\Phi^T t)^2]=E[((\Phi^T\Phi)^{-1}\Phi^T(\Phi{w}+e))^2]$
+
+$=E[(I{w}+(\Phi^T\Phi)^{-1}\Phi^T e)^2]$
+
+in the context of question, we can treat ${w}$ as a given true value
+
+$cov(\hat{w})=E[({w}+(\Phi^T\Phi)^{-1}\Phi^T e)^2]-{w}^2={w}^2+E[((\Phi^T\Phi)^{-1}\Phi^T e)^2]-{w}^2$
+
+$=E[((\Phi^T\Phi)^{-1}\Phi^T e)^2]=((\Phi^T\Phi)^{-1}\Phi^T)^2E(e^2)$
+
+$((\Phi^T\Phi)^{-1}\Phi^T)^2=(\Phi^T\Phi)^{-1}\Phi^T\Phi ((\Phi^T\Phi)^{-1})^T=((\Phi^T\Phi)^{-1})^T=((\Phi^T\Phi)^T)^{-1}$
+
+$=(\Phi^T\Phi)^{-1}$
+
+therefore $cov(\hat{w})=(\Phi^T\Phi)^{-1}E(e^2)$ where $E(e^2)=\sigma^2$
+
+so $cov(\hat{w})=(\Phi^T\Phi)^{-1}\sigma^2$
+
+\newpage
+
+## 2.2
+
+$\hat{w}_{MAP}=\text{argmax}_wp(t|\Phi,w)p(w|\Phi)$
+
+$=\text{argmax}_w \log{(p(t|\Phi,w)p(w|\Phi))}$
+
+$=\text{argmax}_w \log{p(t|\Phi,w)}+\log{p(w|\Phi)}$
+
+$=\text{argmax}_w \log{\frac{1}{(2\pi\sigma^2)^\frac{1}{2}}}\exp{(-\frac{1}{2\sigma^2}(t-\Phi w)^2)}+\log{\frac{1}{(2\pi\tau^2)^\frac{1}{2}}}\exp{(-\frac{1}{2\tau^2}(w-0)^2)}$
+
+$=\log{\frac{1}{(2\pi\sigma^2)^\frac{1}{2}}}-\frac{1}{2\sigma^2}(t-\Phi w)^2+\log{\frac{1}{(2\pi\tau^2)^\frac{1}{2}}}-\frac{1}{2\tau^2}(w-0)^2$
+
+remove constant that won't affect result
+
+$\hat{w}_{MAP}=\text{argmax}_w-\frac{1}{\sigma^2}(t-\Phi w)^T(t-\Phi w)-\frac{1}{\tau^2}w^Tw$
+
+$=\text{argmin}_w\frac{1}{\sigma^2}(t-\Phi w)^T(t-\Phi w)+\frac{1}{\tau^2}w^Tw$
+
+$=\text{argmin}_w \frac{1}{\sigma^2}(w^T\Phi^T\Phi w-2w^T\Phi^Tt)+\frac{1}{\tau^2}w^Tw$
+
+$=\text{argmin}_w w^T(\Phi^T\Phi+\frac{\sigma^2}{\tau^2}I)w-2w^T\Phi^Tt$
+
+take gradient and set to 0, we have $(\Phi^T\Phi+\frac{\sigma^2}{\tau^2}I)w-2\Phi^Tt=0$
+
+so $(\Phi^T\Phi+\frac{\sigma^2}{\tau^2}I)\hat{w}=\Phi^Tt$
+
+recall $\lambda = \frac{\sigma^2}{\tau^2}$
+
+then we have $(\Phi^T\Phi+\lambda I)\hat{w}=\Phi^Tt$
+
+$\hat{w}=(\Phi^T\Phi+\lambda I)^{-1}\Phi^Tt$
+
